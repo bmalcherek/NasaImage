@@ -86,8 +86,9 @@ func main() {
 	defer conn.Close()
 
 	r := mux.NewRouter()
-	r.HandleFunc("/", home).Methods("GET")
-	r.HandleFunc("/images/", images).Methods("GET")
+	s := r.PathPrefix("/api/v1/").Subrouter()
+	s.HandleFunc("/", home).Methods("GET")
+	s.HandleFunc("/images/", images).Methods("GET")
 	err = http.ListenAndServe(":8080", r)
 	if err != nil {
 		log.Fatal(err)
