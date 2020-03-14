@@ -3,7 +3,6 @@ package db
 import (
 	"context"
 	"log"
-	"time"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -26,7 +25,7 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	Ctx, CtxCancel = context.WithTimeout(context.Background(), 1000*time.Second)
+	Ctx, CtxCancel = context.WithCancel(context.Background())
 
 	if err = Client.Connect(Ctx); err != nil {
 		log.Fatal(err)
