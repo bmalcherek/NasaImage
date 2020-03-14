@@ -6,15 +6,8 @@ import (
 )
 
 func main() {
-	defer db.Conn.Close()
+	defer db.CtxCancel()
+	defer db.Client.Disconnect(db.Ctx)
 
 	handlers.Handle()
-	/*r := mux.NewRouter()*/
-	//s := r.PathPrefix("/api/v1/").Subrouter()
-	//s.HandleFunc("/", views.Home).Methods("GET")
-	//s.HandleFunc("/images/", views.Images).Methods("GET")
-	//err = http.ListenAndServe(":8080", r)
-	//if err != nil {
-	//log.Fatal(err)
-	/*}*/
 }
